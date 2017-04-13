@@ -1,3 +1,7 @@
+###Function taken from piecewiseSEM package soley for convenience purposes. piecewiseSEM is published by by Jonathan S. Lefcheck <jslefche@vims.edu>###
+#######################################################################################################################################################
+#Lefcheck, Jonathan S. (2015) piecewiseSEM: Piecewise structural equation modeling in R for ecology, evolution, and systematics. Methods in Ecology and Evolution. 7(5): 573-579. DOI: 10.1111/2041-210X.12512
+
 r.squared.lme <- function(mdl){
   # Get design matrix of fixed effects from model
   Fmat <- model.matrix(eval(mdl$call$fixed)[-2], mdl$data)
