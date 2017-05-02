@@ -38,11 +38,16 @@ r.sq.lmer <- function(mod){
     
     }
     if(class(i)=="lme"){
-      stopifnot(i$method=="ML")
+      if(i$method!="ML"){stop("Set estimation method to ML in lme function.")}
+      if(is.null(i$na.action)){
+        datatable <- i$data
+      }else{
+        datatable <- i$data[-i$na.action,]
+      }
       nullform <- paste0(".~1")
       nullform <- update.formula(i,nullform)
       
-      nullmodel <- lme(nullform, random=as.formula(as.character(i$call[4])), na.action=na.exclude, data=i$data[-i$na.action,], control=list(opt="optim"),method="ML")
+      nullmodel <- lme(nullform, random=as.formula(as.character(i$call[4])), na.action=na.exclude, data=datatable, control=list(opt="optim"),method="ML")
       OUTFILE <- table(as.vector(i$groups))
       
       vcov <- VarCorr(nullmodel)
