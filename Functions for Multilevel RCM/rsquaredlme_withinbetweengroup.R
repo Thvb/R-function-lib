@@ -56,8 +56,8 @@ r.sq.lmer <- function(mod){
       
       tau0plussigma0 <- sum(tau0,sigma0)
       DVchar <- grep(paste0("^",as.character(mod$terms)[2],"$"),colnames(i$data))
-      DV <- i$data[,DVchar]
-      samplevariance <- sd(DV[-i$na.action])^2
+      DV <- datatable[,DVchar]
+      samplevariance <- sd(DV)^2
       
       vcov2 <- VarCorr(i)
       tau1 <- as.numeric(vcov2[1,1])
