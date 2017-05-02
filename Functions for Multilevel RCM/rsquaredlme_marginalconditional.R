@@ -5,7 +5,12 @@
 r.squared.lme <- function(mdl){
   # Get design matrix of fixed effects from model
   Fmat <- model.matrix(eval(mdl$call$fixed)[-2], mdl$data)
-  Fmat <- Fmat[-mdl$na.action,match(names(fixef(mdl)),colnames(Fmat))]
+  if(is.null(mdl$na.action)){
+    Fmat <- Fmat[,match(names(fixef(mdl)),colnames(Fmat))]
+  }else{
+    Fmat <- Fmat[-mdl$na.action,match(names(fixef(mdl)),colnames(Fmat))]
+  }
+  
   # Get variance of fixed effects by multiplying coefficients by design matrix
   VarF <- var(as.vector(nlme::fixef(mdl) %*% t(Fmat)))
   # First, extract variance-covariance matrix of random effects

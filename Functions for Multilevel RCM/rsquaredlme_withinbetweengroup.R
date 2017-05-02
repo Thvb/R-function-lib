@@ -55,7 +55,7 @@ r.sq.lmer <- function(mod){
       sigma0 <- as.numeric(vcov[2,1])
       
       tau0plussigma0 <- sum(tau0,sigma0)
-      DVchar <- grep(paste0("^",as.character(mod$terms)[2],"$"),colnames(i$data))
+      DVchar <- grep(paste0("^",as.character(i$terms)[2],"$"),colnames(i$data))
       DV <- datatable[,DVchar]
       samplevariance <- sd(DV)^2
       
